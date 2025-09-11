@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio 😁</title>
+    <!-- 核心：Tocas UI -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/5.0.2/tocas.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/5.0.2/tocas.min.js"></script>
+
+    <!-- 字體：Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 啟用：響應式設計 -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- New Index for Tablet and Mobile -->
+    <div
+      class="main-layout ts-grid is-center-aligned is-stretched is-compact"
+      style="padding: 0.5rem"
+    >
+      <div class="main-content-mobile column is-16-wide ts-box">
+        <script>
+          // Load home.html into main-content on initial page load
+          fetch("pages/dashboard.html")
+            .then((res) => res.text())
+            .then((html) => {
+              document.querySelector(".main-content-mobile").innerHTML = html;
+            });
+        </script>
+      </div>
+
+      <!-- Bottom Navbar for Mobile -->
+      <div class="main-navbar-mobile column is-16-wide">
+        <div class="ts-app-navbar is-fluid is-indicated" id="mobile-navbar">
+          <!-- <a class="item is-active" data-page="home.html">
+            <span class="ts-icon is-house-icon"></span>
+            <div class="label">Home</div>
+          </a> -->
+          <a class="item" data-page="dashboard.html">
+            <span class="ts-icon is-table-icon"></span>
+            <div class="label">Dashboard</div>
+          </a>
+          <a class="item" data-page="exercises.html">
+            <span class="ts-icon is-dumbbell-icon"></span>
+            <div class="label">Exercises</div>
+          </a>
+          <a class="item" data-page="settings.html">
+            <span class="ts-icon is-gears-icon"></span>
+            <div class="label">Settings</div>
+          </a>
+          <a class="item" data-page="plus.html">
+            <span class="ts-icon is-coins-icon"></span>
+            <div class="label">FIT+</div>
+          </a>
+          <!-- <a class="item" data-page="socials.html">
+            <span class="ts-icon is-hashtag-icon"></span>
+            <div class="label">Socials</div>
+          </a> -->
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Music tap-to-play/pause
+        var img = document.getElementById("music-img-mobile");
+        var audio = document.getElementById("music-audio-mobile");
+        if (img && audio) {
+          img.addEventListener("click", function () {
+            if (audio.paused) {
+              audio.play();
+            } else {
+              audio.pause();
+            }
+          });
+        }
+
+        // Mobile navbar SPA navigation
+        var mobileLinks = document.querySelectorAll(
+          "#mobile-navbar .item[data-page]"
+        );
+        mobileLinks.forEach(function (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            var page = link.getAttribute("data-page");
+            if (!page) return;
+            fetch("pages/" + page)
+              .then(function (res) {
+                return res.text();
+              })
+              .then(function (html) {
+                document.querySelector(".main-content-mobile").innerHTML = html;
+                // Highlight active menu item
+                mobileLinks.forEach(function (l) {
+                  l.classList.remove("is-active");
+                });
+                link.classList.add("is-active");
+              });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

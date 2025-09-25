@@ -59,13 +59,13 @@
             <span class="ts-icon is-dumbbell-icon"></span>
             <div class="label">Exercises</div>
           </a>
+            <a class="item" data-page="plus.html">
+                <span class="ts-icon is-coins-icon"></span>
+                <div class="label">FIT+</div>
+            </a>
           <a class="item" data-page="settings.html">
             <span class="ts-icon is-gears-icon"></span>
             <div class="label">Settings</div>
-          </a>
-          <a class="item" data-page="plus.html">
-            <span class="ts-icon is-coins-icon"></span>
-            <div class="label">FIT+</div>
           </a>
           <!-- <a class="item" data-page="socials.html">
             <span class="ts-icon is-hashtag-icon"></span>
@@ -77,8 +77,8 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Music tap-to-play/pause
-        var img = document.getElementById("music-img-mobile");
-        var audio = document.getElementById("music-audio-mobile");
+        let img = document.getElementById("music-img-mobile");
+        let audio = document.getElementById("music-audio-mobile");
         if (img && audio) {
           img.addEventListener("click", function () {
             if (audio.paused) {
@@ -90,13 +90,13 @@
         }
 
         // Mobile navbar SPA navigation
-        var mobileLinks = document.querySelectorAll(
+        let mobileLinks = document.querySelectorAll(
           "#mobile-navbar .item[data-page]"
         );
         mobileLinks.forEach(function (link) {
           link.addEventListener("click", function (e) {
             e.preventDefault();
-            var page = link.getAttribute("data-page");
+            let page = link.getAttribute("data-page");
             if (!page) return;
             fetch("pages/" + page)
               .then(function (res) {
